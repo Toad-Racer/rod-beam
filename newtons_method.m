@@ -12,5 +12,5 @@ function approx_x = newtons_method(x0, epsilon, F, JF)
         iterations = iterations+1;
     end
 
-    disp(iterations);
+    %disp(iterations);
         

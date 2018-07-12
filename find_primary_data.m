@@ -16,21 +16,6 @@ function primary_data = find_primary_data(prev_data, const)
                         Can be passed to any function in this project with
                         a primary_data parameter.
     %}
-%     % add stresses to loading vector
-%     prev_data.f1(1) = prev_data.f1(1) + prev_data.sigma_db;
-%     prev_data.f1(end) = prev_data.f1(end) + prev_data.sigma_dt;
-%     
-%     % solve for primary data
-%     u = current_rod_matrix(prev_data, const)\[prev_data.f1; prev_data.f2];
-    
-
-    rod_system = current_condensed_system(prev_data, const);
-    primary_data = find_beam_data(prev_data, const, [rod_system.matrix(1, 1), -rod_system.loads(1)]);
-    sigma_db = rod_system.matrix(1, 1)*primary_data.w(end)-rod_system.loads(1);
-    u = rod_system.matrix\(rod_system.loads+[sigma_db; zeros(length(rod_system.loads)-1, 1)]);
-    u = swap_rows(u, 2, const.num_nodes);
-    u = swap_rows(u, 3, length(u));
-
     
     % split primary data into vectors for u and phi
     primary_data.u = u(1:const.num_nodes);
