@@ -17,12 +17,14 @@ function primary_data = find_primary_data(prev_data, const)
                         a primary_data parameter.
     %}
     f = [prev_data.f1; prev_data.f2];
-    R_inv = inv(prev_data.rod_matrix);
-    f_star = R_inv*f;
-    a = R_inv(1, 1);
-    primary_data = find_beam_data(prev_data, const, [1/a, -1/a*f_star(1)]);
-    sigma_db = 1/a*(primary_data.w(end) - f_star(1));
-    u = f_star + sigma_db*R_inv(:, 1); 
+    partial_inversion = prev_data.rod_matrix\[f, [1; zeros(length(f)-1, 1)]];
+    f_star = partial_inversion(:, 1);
+    I_1 = partial_inversion(:, 2);
+    
+    sigma_db = [1/I_1(1), -1/I_1(1)*f_star(1)]; % Represents sigma_db = 1/a*Wn - 1/a*f_star(1)
+    primary_data = find_beam_data(prev_data, const, sigma_db);
+    sigma_db = sigma_db*[primary_data.w(end); 1]; % Calculate actual scaler value of sigma_db
+    u = f_star + sigma_db*I_1; 
 
     % split primary data into vectors for u and phi
     primary_data.u = u(1:const.num_nodes);
