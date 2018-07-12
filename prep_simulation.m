@@ -16,4 +16,3 @@ function [const, initial_data] = prep_simulation(num_nodes, ht)
     %}
     const = set_constants(num_nodes, ht);
     initial_data = set_initial_data(const);
-    %plot_data(initial_data, const);
