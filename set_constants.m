@@ -26,3 +26,4 @@ function const = set_constants(num_nodes, ht)
     
     % coefficent matrices (time-dependent terms excluded)
     const = merge_structs(const, coefficient_matrices(const));
+    const.jac_term = -const.B43*const.B33\const.B34 + const.B44;
