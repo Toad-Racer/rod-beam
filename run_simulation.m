@@ -15,7 +15,7 @@ function run_simulation(num_nodes, ht, num_steps)
     %}
     [const, current_data] = prep_simulation(num_nodes, ht);
     for i = 1:num_steps
-        waitforbuttonpress;
+        %waitforbuttonpress;
         current_data = step_simulation(current_data, const);
     end
     

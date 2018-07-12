@@ -14,4 +14,4 @@ function next_data = step_simulation(current_data, const)
                              add_derived_data.m for a full list.
     %}
     next_data = add_derived_data(find_primary_data(current_data, const), current_data, const);
-    plot_data(next_data, const);
+    %plot_data(next_data, const);
