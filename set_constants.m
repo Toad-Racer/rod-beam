@@ -26,5 +26,3 @@ function const = set_constants(num_nodes, ht)
     
     % coefficent matrices (time-dependent terms excluded)
     const = merge_structs(const, coefficient_matrices(const));
-    
-    const.condensed_rod_system = condense_rod_system(const);

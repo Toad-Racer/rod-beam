@@ -25,4 +25,4 @@ function data = set_initial_data(const)
     data.phi = (exp(-K(data.r)/const.kappa_th.*(y_phi-1)) ...
         - exp(K(data.r)/const.kappa_th).*cos(pi/2*y_phi).^2)';
     data = merge_structs(data, loading_vectors(data, const));
-    % data.rod_matrix = current_rod_matrix(data, const);
+    data.rod_matrix = current_rod_matrix(data, const);

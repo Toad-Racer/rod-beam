@@ -19,11 +19,16 @@ function primary_data = find_primary_data(prev_data, const)
     f = [prev_data.f1; prev_data.f2];
     R_inv = inv(prev_data.rod_matrix);
     f_star = R_inv*f;
-    a = R_inv(1, 1);
-    primary_data = find_beam_data(prev_data, const, [1/a, -1/a*f_star(1)]);
-    sigma_db = 1/a*(primary_data.w(end) - f_star(1));
-    u = f_star + sigma_db*R_inv(:, 1); 
+    a = 1/R_inv(1, 1);
+    primary_data = find_beam_data(prev_data, const, [a, -a*f_star(1)]);
+    sigma_db = a*primary_data.w(end) - a*f_star(1);
+    f = f(1) + sigma_db; 
+    u = prev_data.rod_matrix\f;
 
+    
     % split primary data into vectors for u and phi
     primary_data.u = u(1:const.num_nodes);
     primary_data.phi = u(const.num_nodes+1:end);
+
+    primary_data = merge_structs(primary_data, ...
+        find_beam_data(prev_data, const, [0, -1]));
