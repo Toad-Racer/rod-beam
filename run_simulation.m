@@ -1,4 +1,4 @@
-function run_simulation(num_nodes, ht, num_steps)
+function run_simulation(num_nodes, ht, num_steps, output_fn)
     %{
      Runs a simulation of the rod without considering contact or the beam.
      On each time-step the state of the simulation will be plotted. The
@@ -14,8 +14,9 @@ function run_simulation(num_nodes, ht, num_steps)
      @param    num_steps       The numer of time-steps to simulate.  
     %}
     [const, current_data] = prep_simulation(num_nodes, ht);
+    output_fn(current_data, const);
     for i = 1:num_steps
-        waitforbuttonpress;
         current_data = step_simulation(current_data, const);
+        output_fn(current_data, const);
     end
     
