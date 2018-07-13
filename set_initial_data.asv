@@ -1,4 +1,4 @@
-function data = set_initial_data(const)
+function data = set_initial_data(config, const)
     %{
      Creates a struct containing fields for all initial data. This struct  
      can be passed to any function in this project with a parameter called 
@@ -17,8 +17,12 @@ function data = set_initial_data(const)
     y_u = 0:const.hy:const.Ly;
     y_phi = y_u(2:end);
     x = const.hx:const.hx:1;
-    data = struct('u', 0+(0*y_u'), 'ut', 0*y_u', 'w', 0*x', 'wt', 0*x',  ...
-        'theta', 0*x', 'theta_t', 0*x');
+
+    data = struct('u', arrayfun(config.initial.u, y_u'), ...
+        'ut', arrayfun(config.initial.ut, y_u'), ...
+        'w', arrayfun(config.initial.w, x'), 'wt', arrayfun(config.initial.wt, x'),  ...
+        'theta', arrayfun(config.initial.theta, x'), ...
+        'theta_t', arrayfun(config.initial.theta_t, x'));
         
     data.r = r(data, const);
     data.phi = (exp(-K(data.r)/const.kappa_th.*(y_phi-1)) ...
