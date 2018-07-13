@@ -9,7 +9,8 @@
     F = @(w) const.B43*theta(w) + const.B44*w+N(w, const)-g ... 
         -[zeros(length(g)-1, 1); sigma_br(1)*w(end)];
     C = const.jac_term - sigma_br(1)*I; % constant term of jacobian
-    JF = @(w) C + 2*(const.Kb*w)*(const.Kb*w)'+(w'*const.Kb*w)*const.Kb;
+    JF = @(w) C + 1/2*(const.beta*const.Kb ...
+        + const.rho*(2*(const.Kb*w)*(const.Kb*w)'+(w'*const.Kb*w)*const.Kb));
     
     beam_data.w = newtons_method(prev_data.w, 10^(-6), F, JF);
     beam_data.theta = theta(beam_data.w);

@@ -24,6 +24,6 @@ function plot_data(data, const)
 %     disp(data.w(end))
     disp('u')
     disp(data.u(end))
-    disp('sigma_dt')
-    disp(data.sigma_dt)
+%     disp('sigma_dt')
+%     disp(data.sigma_dt)
     
