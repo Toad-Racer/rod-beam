@@ -32,7 +32,7 @@ function primary_data = find_primary_data(prev_data, const)
     if u_n < const.gap % No contact
         u = f_star - sigma_db*inv_b;
     else
-        sym_sigma_db = 1/(inv_b(1)+inv_t(1)/inv_t(const.num_nodes)*inv_b(const.num_nodes))* ... 
+        sym_sigma_db = 1/(-inv_b(1)+inv_t(1)/inv_t(const.num_nodes)*inv_b(const.num_nodes))* ... 
             [1, -f_star(1)-inv_t(1)/inv_t(const.num_nodes)*(const.gap-f_star(const.num_nodes))];
         primary_data = find_beam_data(prev_data, const, sym_sigma_db);
         sigma_db = sym_sigma_db*[primary_data.w(end); 1]; % Calculate actual scaler value of sigma_db
