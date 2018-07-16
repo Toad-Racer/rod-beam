@@ -1,17 +1,19 @@
 function loads = loading_vectors(current_data, const)
     %{
-     Constructs the rod's loading vector for the current time step as
-     specified in the manuscript.
+     Constructs the loading vector on the right hand side of the reccurance
+     relation, as specified in the manuscript, for the current time step.
+     Does not include stress terms.
+     
 
      @param    current_data    A struct with fields for each of the system's
                                functions (u, ut, phi, theta, theta_t, w, 
                                and wt) containing their values for the 
                                current time step.
      @param    const           A struct with fields for all the constants
-                               relevant to the simulation. See set_constants.m
+                               relevant to the simulation. See get_constants.m
                                for a full list.
-     @return    f    The system's loading vector for the current time step as
-                     specified in the manuscript (though without stress terms).
+     @return    loads    The system's loading vector for the current time step as
+                         specified in the manuscript (though without stress terms).
     %}
     % loads for u. vector of size n+1. Missing stress terms
     loads.f1 = (1/const.ht^2*const.Md-(1/2-const.alpha_d/const.ht)*const.Kd)*current_data.u ...
