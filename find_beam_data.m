@@ -24,14 +24,14 @@
     
     theta = @(w) const.B33\(f-const.B34*w);
     % Nonlinear system
-    F = @(w) const.B43*theta(w) + const.B44*w+N(w, const)-g ... 
-        -[zeros(length(g)-1, 1); sigma_br(1)*w(end)]; % apply Wn-dependent term of sigma_br
+    F = @(w) const.B43*theta(w) + (const.B44+1/2*(N(w, const)+N(prev_data.w, const)))*w ... 
+        -g-[zeros(length(g)-1, 1); sigma_br(1)*w(end)]; % apply Wn-dependent term of sigma_br
     
     % constant term of jacobian
     C = const.jac_term - sigma_br(1)*I; % Apply sigma_br term to jacobian
     % Jacobian of F
-    JF = @(w) C + 1/2*const.rho*(2*(const.Kb*w)*(const.Kb*w)' ... 
-        +(w'*const.Kb*w)*const.Kb);
+    JF = @(w) C + 1/2*(const.rho*(2*(const.Kb*w)*(const.Kb*w)' ... 
+        +(w'*const.Kb*w)*const.Kb) + N(prev_data.w, const));
     
     % Approximate w
     beam_data.w = newtons_method(F, JF, prev_data.w, 10^(-6));

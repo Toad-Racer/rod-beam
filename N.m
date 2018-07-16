@@ -9,4 +9,4 @@ function value = N(w, const)
 
      @return    value    The value of Nw.
     %}
-    value = 1/2*(const.beta + const.rho*(w'*const.Kb*w))*const.Kb*w;
+    value = (const.beta + const.rho*(w'*const.Kb*w))*const.Kb;

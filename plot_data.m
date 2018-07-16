@@ -14,7 +14,7 @@ function plot_data(data, const)
     rod_position = data.u + y';
     
     figure(1);
-    plot(y, data.u, 'b', y, data.ut, 'g', y, extended_phi, 'r');
+    plot(y, rod_position, 'b', y, data.ut, 'g', y, extended_phi, 'r');
     
     figure(2);
     plot(x, data.w, 'b', x, data.wt, 'g', x, data.theta, 'r', x, data.theta_t, 'y');

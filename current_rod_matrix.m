@@ -15,4 +15,4 @@ function rod_matrix = current_rod_matrix(current_data, const)
      % Assemble block matrix
      rod_matrix = [const.B11, const.B12; const.B21, const.B22];
      % Add time-dependent term of B22
-     rod_matrix(end, end) = rod_matrix(end, end) + K(current_data.r);
+     rod_matrix(end, end) = rod_matrix(end, end) + K(current_data.r)/2;
