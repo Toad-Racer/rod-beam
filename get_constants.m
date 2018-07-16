@@ -1,4 +1,4 @@
-function const = set_constants(config)
+function const = get_constants(config)
     %{
      Creates a struct containing fields for all constants relevant to the 
      simulation. This struct can be passed to any function in this project

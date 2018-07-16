@@ -1,4 +1,4 @@
-function data = set_initial_data(config, const)
+function data = get_initial_data(config, const)
     %{
      Creates a struct containing fields for all initial data. This struct  
      can be passed to any function in this project with a parameter called 

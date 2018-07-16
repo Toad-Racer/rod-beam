@@ -15,7 +15,7 @@ function [const, initial_data, plot_fn, log_fns] = prep_simulation(num_nodes, ht
                                 (see initial_data.m for a full list).    
     %}
     config = get_config(num_nodes, ht);
-    const = set_constants(config);
-    initial_data = set_initial_data(config, const);
+    const = get_constants(config);
+    initial_data = get_initial_data(config, const);
     plot_fn = config.plot_fn;
     log_fns = config.log_fns;
