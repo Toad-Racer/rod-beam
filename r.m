@@ -14,8 +14,6 @@ function value = r(current_data, const)
     if current_gap > 0 % if there is no contact
         value = current_gap;
     else % if there is contact
-        % contact is not currently considered
-        error('The rod is in contact with the rigid body');
-        % value = current_data.sigma_dt;
+        value = current_data.sigma_dt;
     end
     

@@ -1,40 +1,37 @@
 function primary_data = find_primary_data(prev_data, const)
     %{
-     Solves for the rod's primary data (u and phi) at the current time step.
-     Since this simulation currently ignores contact and the beam, the 
-     linear system is simply solved using mldivide. 
+     Approximates the system's primary functions and stresses at the
+     current time step by solving the nonlinear reccurence
+     relation with all constraints applied. 
 
      @param    prev_data       A struct with fields for the primary and
                                derived data of the previous time step. See
                                add_derived_data.m for a full list.
-     @param    const           A struct with the field num_nodes containg
-                               the number of nodes on the rod's domain
-                               (counting nodes at y=0 and y=Ly as well as
-                               all interior nodes).
-     @return    data    A struct containing the system's primary data 
-                        (u, phi, theta, and w) at the current time-step.
-                        Can be passed to any function in this project with
-                        a primary_data parameter.
+     @param    const           A struct with all constants relevant to the 
+                               simulation. See get_constants.m for a full
+                               list.
+
+     @return    primary_data    A struct containing the system's primary data 
+                                (u, phi, theta, w, sigma_db, and sigma_dt) 
+                                at the current time-step. Can be passed to any
+                                function in this project with a 'primary_data'
+                                parameter.
     %}
-%     % add stresses to loading vector
-%     prev_data.f1(1) = prev_data.f1(1) + prev_data.sigma_db;
-%     prev_data.f1(end) = prev_data.f1(end) + prev_data.sigma_dt;
-%     
-%     % solve for primary data
-%     u = current_rod_matrix(prev_data, const)\[prev_data.f1; prev_data.f2];
+    pinv = partially_invert_rod_system(prev_data, const);
+    
+    if prev_data.sigma_dt == 0 % If there was no contact last step
+        % Initially assume there will not be contact this step
+        primary_data = no_contact_data(pinv, prev_data, const);
+        if ~primary_data.assumption_consistent % If there is contact
+            primary_data = with_contact_data(pinv, prev_data, const);
+        end
+    else % If there was contact last step
+        % Initially assume there will be contact this step
+        primary_data = with_contact_data(pinv, prev_data, const);
+        if ~primary_data.assumption_consistent % If there is no contact
+            primary_data = no_contact_data(pinv, prev_data, const);
+        end
+    end
+
     
 
-    rod_system = current_condensed_system(prev_data, const);
-    primary_data = find_beam_data(prev_data, const, [rod_system.matrix(1, 1), -rod_system.loads(1)]);
-    sigma_db = rod_system.matrix(1, 1)*primary_data.w(end)-rod_system.loads(1);
-    u = rod_system.matrix\(rod_system.loads+[sigma_db; zeros(length(rod_system.loads)-1, 1)]);
-    u = swap_rows(u, 2, const.num_nodes);
-    u = swap_rows(u, 3, length(u));
-
-    
-    % split primary data into vectors for u and phi
-    primary_data.u = u(1:const.num_nodes);
-    primary_data.phi = u(const.num_nodes+1:end);
-
-%     primary_data = merge_structs(primary_data, ...
-%         find_beam_data(prev_data, const, prev_data.sigma_db));

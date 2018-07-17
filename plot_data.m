@@ -18,10 +18,3 @@ function plot_data(data, const)
     
     figure(2);
     plot(x, data.w, 'b', x, data.wt, 'g', x, data.theta, 'r', x, data.theta_t, 'y');
-    waitforbuttonpress;
-    
-%     disp('---------')
-%     disp('w')
-%     disp(data.w(end))
-%     disp('u')
-%     disp(data.u(1))
