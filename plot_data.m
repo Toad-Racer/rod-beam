@@ -1,4 +1,4 @@
-function plot_data(data, const)
+function plot_data(~, data, const)
     %{
      Plots the current state of the simulation.
 
