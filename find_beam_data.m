@@ -21,17 +21,18 @@
     g(end) = g(end) + sigma_br(2); % apply the constant part of sigma_br
     I = sparse(length(g), length(g));
     I(end, end) = 1;
+    Nk = N(prev_data.w, const);
     
     theta = @(w) const.B33\(f-const.B34*w);
     % Nonlinear system
-    F = @(w) const.B43*theta(w) + (const.B44+1/2*(N(w, const)+N(prev_data.w, const)))*w ... 
+    F = @(w) const.B43*theta(w) + (const.B44+1/2*(N(w, const)+Nk))*w ... 
         -g-[zeros(length(g)-1, 1); sigma_br(1)*w(end)]; % apply Wn-dependent term of sigma_br
     
     % constant term of jacobian
-    C = const.jac_term - sigma_br(1)*I; % Apply sigma_br term to jacobian
+    C = const.jac_term - sigma_br(1)*I + 1/2*Nk; % Apply time dependent terms
     % Jacobian of F
-    JF = @(w) C + 1/2*(const.rho*(2*(const.Kb*w)*(const.Kb*w)' ... 
-        +(w'*const.Kb*w)*const.Kb) + N(prev_data.w, const));
+    JF = @(w) C + const.rho*((const.Kb*w)*(const.Kb*w)' ... 
+        + 1/2*(w'*const.Kb*w)*const.Kb);
     
     % Approximate w
     beam_data.w = newtons_method(F, JF, prev_data.w, 10^(-6));
