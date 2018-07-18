@@ -1,4 +1,4 @@
-function output_data(data, const, plot_state, plot_fn, log_fns)
+function output_data(data, const, plot_fn, log_fns)
     %{
      Calls the configurable output functions. See get_config.m for more
      details.
@@ -19,4 +19,4 @@ function output_data(data, const, plot_state, plot_fn, log_fns)
         end
     end
     
-    plot_fn(plot_state, data, const);
+    plot_fn(data, const);

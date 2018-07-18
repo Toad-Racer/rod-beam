@@ -1,4 +1,4 @@
-function [const, initial_data, plot_state, plot_fn, log_fns] = prep_simulation(num_nodes, ht)
+function [const, initial_data, plot_fn, log_fns] = prep_simulation(num_nodes, ht)
     %{
      Creates a struct for all relevant constants (see set_constants.m for a 
      full list), a struct for all inital data (see initial_data.m for a
@@ -23,5 +23,5 @@ function [const, initial_data, plot_state, plot_fn, log_fns] = prep_simulation(n
     const = get_constants(config);
     initial_data = get_initial_data(config, const);
     plot_state = config.prep_plot_fn(initial_data, const);
-    plot_fn = config.plot_fn;
+    plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
     log_fns = config.log_fns;
