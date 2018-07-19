@@ -1,8 +1,9 @@
-function [const, initial_data, plot_fn, log_fns] = prep_simulation(num_nodes, ht)
+function sim = prep_simulation(num_nodes, ht)
     %{
      Creates a struct for all relevant constants (see set_constants.m for a 
      full list), a struct for all inital data (see initial_data.m for a
-     full list) and gets configurable output options.
+     full list), gets configurable output options and returns them all in a
+     struct.
 
      @param    num_nodes       the number of nodes on each spatial domain
                                (counting nodes at x=0 and x=Lx as well as
@@ -15,13 +16,14 @@ function [const, initial_data, plot_fn, log_fns] = prep_simulation(num_nodes, ht
                                 (see initial_data.m for a full list).
      @return    plot_fn         A function to be called to plot the current
                                 state of the system at each time-step.
+                                Takes 2 arguments.
      @return    log_fns         Functions to be called to log certain bits
                                 data to the matlab console at each
                                 time-step.
     %}
     config = get_config(num_nodes, ht);
-    const = get_constants(config);
-    initial_data = get_initial_data(config, const);
-    plot_state = config.prep_plot_fn(initial_data, const);
-    plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
-    log_fns = config.log_fns;
+    sim.const = get_constants(config);
+    sim.data = get_initial_data(config, sim.const);
+    plot_state = config.prep_plot_fn(sim.data, sim.const);
+    sim.plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
+    sim.log_fns = config.log_fns;
