@@ -32,15 +32,15 @@ function lines = prep_full_animation(initial_data, const)
     
     % Beam's velocity
     subplot(3, 3, 3);
-    title("Beam's velocity");
+    title('Beam''s velocity');
     lines.beam_velo = animatedline;
      
     % Rod's velocity
     subplot(3, 3, 6);
-    title("Rod's velocity");
+    title('Rod''s velocity');
     lines.rod_velo = animatedline;
     
     % Rod's temperature
     subplot(3, 3, 9);
-    title("Rod's temperature distribution");
+    title('Rod''s temperature distribution');
     lines.rod_temp = animatedline;
