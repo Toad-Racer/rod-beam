@@ -27,3 +27,4 @@ function sim = prep_simulation(num_nodes, ht)
     plot_state = config.prep_plot_fn(sim.data, sim.const);
     sim.plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
     sim.log_fns = config.log_fns;
+    sim.wait_for_input = config.wait_for_input;

@@ -1,4 +1,4 @@
-function output_data(data, const, plot_fn, log_fns)
+function output_data(sim)
     %{
      Calls the configurable output functions. See get_config.m for more
      details.
@@ -10,13 +10,17 @@ function output_data(data, const, plot_fn, log_fns)
                         the simulation. See get_constants.m for a full
                         list.
     %}
-    if log_fns ~= false
+    if sim.log_fns ~= false
         disp('---------------');
-        for msg = keys(log_fns)
+        for msg = keys(sim.log_fns)
             disp(msg);
-            fn = log_fns(cell2mat(msg));
-            disp(fn(data, const));
+            fn = sim.log_fns(cell2mat(msg));
+            disp(fn(sim.data, sim.const));
         end
     end
     
-    plot_fn(data, const);
+    sim.plot_fn(sim.data, sim.const);
+    
+    if sim.wait_for_input
+        waitforbuttonpress;
+    end
