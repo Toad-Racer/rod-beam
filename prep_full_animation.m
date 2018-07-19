@@ -1,4 +1,21 @@
 function lines = prep_full_animation(initial_data, const)
+    %{
+     Creates and initializes the figure the animation will play in.
+
+     @param    initial_data    A struct with fields for all the initial
+                               data of the system. See get_initial_data.m
+                               for more details. This parameter is
+                               currently unused, but could potentially be 
+                               used to scale things appropriately. 
+     @param    const           A struct containing all constants relevant
+                               to the simulation. See get_constants.m for
+                               more details.
+
+     @return    lines    A struct containing references to all the animated
+                         line objects in the figure. These can be used by
+                         another function to update the figure.
+                         
+    %}
     f = figure(11);
     clf('reset');
     f.OuterPosition = [100 100 800 600];
