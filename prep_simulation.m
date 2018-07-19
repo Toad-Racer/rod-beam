@@ -22,8 +22,8 @@ function sim = prep_simulation(num_nodes, ht)
                                 time-step.
     %}
     config = get_config(num_nodes, ht);
-    sim.const = get_constants(config);
-    sim.data = get_initial_data(config, sim.const);
+    sim.const = get_constants(config.const);
+    sim.data = get_initial_data(config.initial, sim.const);
     plot_state = config.prep_plot_fn(sim.data, sim.const);
     sim.plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
     sim.log_fns = config.log_fns;

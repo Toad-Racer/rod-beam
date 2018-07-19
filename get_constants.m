@@ -1,4 +1,4 @@
-function const = get_constants(config)
+function const = get_constants(config_const)
     %{
      Creates a struct containing fields for all constants relevant to the 
      simulation. This struct can be passed to any function in this project
@@ -15,7 +15,7 @@ function const = get_constants(config)
                          
     %}
     % scaler constants
-    const = config.const;
+    const = config_const;
     const = merge_structs(const, struct('hy', 1/(const.num_nodes-1), ...
         'hx', 1/(const.num_nodes-1)));
     
