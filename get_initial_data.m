@@ -36,3 +36,4 @@ function data = get_initial_data(config, const)
     
     % Assume no contact on first time-step
     data.sigma_dt = 0;
+    data.sigma_db = NaN; % Don't know yet
