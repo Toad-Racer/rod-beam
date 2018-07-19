@@ -1,5 +1,6 @@
 function lines = prep_full_animation(initial_data, const)
-    f = figure;
+    f = figure(11);
+    clf('reset');
     f.OuterPosition = [100 100 800 600];
     
     % Rod and Beam
