@@ -29,7 +29,7 @@ function data = no_contact_data(pinv, prev_data, const)
     beam_data = find_beam_data(prev_data, const, sym_sigma_db);
     sigma_db = sym_sigma_db*[beam_data.w(end); 1]; % Calculate numeric value of sigma_db
     sigma_dt = 0; % Since we've assumed no contact
-    u_n = pinv.f(const.num_nodes) + sigma_db*pinv.b(const.num_nodes);
+    u_n = pinv.f(const.num_nodes) - sigma_db*pinv.b(const.num_nodes);
     
     % Verify assumption of no contact
     if u_n < const.gap % If no contact
