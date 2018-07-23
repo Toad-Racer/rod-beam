@@ -1,4 +1,4 @@
-function sim = prep_simulation(num_nodes, ht)
+function sim = prep_simulation(num_nodes, ht, num_steps)
     %{
      Creates a struct for all relevant constants (see set_constants.m for a 
      full list), a struct for all inital data (see initial_data.m for a
@@ -21,7 +21,7 @@ function sim = prep_simulation(num_nodes, ht)
                                 data to the matlab console at each
                                 time-step.
     %}
-    config = get_config(num_nodes, ht);
+    config = get_config(num_nodes, ht, num_steps);
     sim.const = get_constants(config.const);
     sim.data = get_initial_data(config.initial, sim.const);
     plot_state = config.prep_plot_fn(sim.data, sim.const);

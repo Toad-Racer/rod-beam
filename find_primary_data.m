@@ -32,6 +32,8 @@ function primary_data = find_primary_data(prev_data, const)
             primary_data = no_contact_data(pinv, prev_data, const);
         end
     end
+    
+    primary_data.t = prev_data.t + const.ht;
 
     
 

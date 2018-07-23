@@ -16,9 +16,9 @@ function lines = prep_full_animation(initial_data, const)
                          another function to update the figure.
                          
     %}
-    f = figure(11);
+    f1 = figure(11);
     clf('reset');
-    f.OuterPosition = [100 100 800 600];
+    f1.OuterPosition = [100 100 800 600];
     
     % Rod and Beam
     subplot(3, 3, [1 2 4 5 7 8]);
@@ -44,3 +44,18 @@ function lines = prep_full_animation(initial_data, const)
     subplot(3, 3, 9);
     title('Rod''s temperature distribution');
     lines.rod_temp = animatedline;
+    
+    figure(13);
+    clf('reset');
+    
+    % Stress on Rod's top
+    subplot(2, 1, 1);
+    title('Stress on Rod''s Top');
+    axis([0, const.T, -inf, inf]);
+    lines.sigma_dt = animatedline('Color', 'r');
+    
+    % Total energy
+    subplot(2, 1, 2);
+    title('Energy in System');
+    axis([0, const.T, -inf, inf]);
+    lines.energy = animatedline('Color', 'r');

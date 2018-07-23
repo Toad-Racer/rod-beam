@@ -32,5 +32,13 @@ function update_full_animation(lines, data, const)
     clearpoints(lines.rod_temp);
     addpoints(lines.rod_temp, y, full([0; data.phi]));
     
+    % Stress on Rod's top
+    addpoints(lines.sigma_dt, data.t, full(data.sigma_dt));
+    
+    % Total Energy
+    addpoints(lines.energy, data.t, full(data.energy));
+    
     drawnow;
+   
+    
     

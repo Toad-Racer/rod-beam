@@ -13,7 +13,7 @@ function run_simulation(num_nodes, ht, num_steps)
      @param    ht              Time-step size.
      @param    num_steps       The numer of time-steps to simulate.  
     %}
-    sim = prep_simulation(num_nodes, ht);
+    sim = prep_simulation(num_nodes, ht, num_steps);
     output_data(sim);
     for i = 1:num_steps
         sim.data = step_simulation(sim.data, sim.const);

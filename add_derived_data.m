@@ -27,6 +27,7 @@ function data = add_derived_data(primary_data, prev_data, const)
     
     % Misc
     data.r = r(data, const);
+    data.energy = current_energy(data, const);
     data = merge_structs(data, loading_vectors(data, const));
     data.rod_matrix = current_rod_matrix(data, const);
     

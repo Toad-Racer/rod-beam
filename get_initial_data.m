@@ -28,9 +28,11 @@ function data = get_initial_data(config_data, const)
         'theta_t', arrayfun(config_data.theta_t, x'));
         
     % Misc
+    data.t = 0;
     data.r = r(data, const);
     data.phi = (exp(-K(data.r)/const.kappa_th.*(y_phi-1)) ...
         - exp(K(data.r)/const.kappa_th).*cos(pi/2*y_phi).^2)';
+    data.energy = current_energy(data, const);
     data = merge_structs(data, loading_vectors(data, const));
     data.rod_matrix = current_rod_matrix(data, const);
     
