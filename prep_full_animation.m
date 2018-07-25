@@ -54,8 +54,9 @@ function lines = prep_full_animation(initial_data, const)
     axis([0, const.T, -inf, inf]);
     lines.sigma_dt = animatedline('Color', 'r');
     
-    % Total energy
+    % Energy
     subplot(2, 1, 2);
     title('Energy in System');
     axis([0, const.T, -inf, inf]);
     lines.energy = animatedline('Color', 'r');
+    lines.accounted_energy = animatedline('LineStyle', '--');
