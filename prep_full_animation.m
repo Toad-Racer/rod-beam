@@ -18,7 +18,7 @@ function lines = prep_full_animation(initial_data, const)
     %}
     f1 = figure(11);
     clf('reset');
-    f1.OuterPosition = [100 100 800 600];
+    f1.OuterPosition = [50 50 900 600];
     
     % Rod and Beam
     subplot(3, 3, [1 2 4 5 7 8]);
@@ -30,33 +30,4 @@ function lines = prep_full_animation(initial_data, const)
     obs_pos = const.gap + const.Ly;
     line(linspace(0.91, 1.09, 100), linspace(obs_pos, obs_pos, 100));
     
-    % Beam's velocity
-    subplot(3, 3, 3);
-    title('Beam''s velocity');
-    lines.beam_velo = animatedline;
-     
-    % Rod's velocity
-    subplot(3, 3, 6);
-    title('Rod''s velocity');
-    lines.rod_velo = animatedline;
-    
-    % Rod's temperature
-    subplot(3, 3, 9);
-    title('Rod''s temperature distribution');
-    lines.rod_temp = animatedline;
-    
-    figure(13);
-    clf('reset');
-    
-    % Stress on Rod's top
-    subplot(2, 1, 1);
-    title('Stress on Rod''s Top');
-    axis([0, const.T, -inf, inf]);
-    lines.sigma_dt = animatedline('Color', 'r');
-    
-    % Energy
-    subplot(2, 1, 2);
-    title('Energy in System');
-    axis([0, const.T, -inf, inf]);
-    lines.energy = animatedline('Color', 'r');
-    lines.accounted_energy = animatedline('LineStyle', '--');
+    lines = merge_structs(lines, prep_secondary_plots(f1, initial_data, const));
