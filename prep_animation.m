@@ -12,7 +12,7 @@ function lines = prep_animation(initial_data, const)
     
     % Rod's top
     subplot(3, 3, [2, 5, 8]);
-    title("Rod's top");
+    title('Rod''s top');
     axis([0.9, 1.1, 0.94, 1.003+const.gap]);
     lines.rod_t = animatedline('LineStyle', 'none', 'Marker', '+');
     % Draw rigid obstacle
