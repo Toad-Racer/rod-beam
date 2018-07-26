@@ -1,11 +1,8 @@
 function run_simulation(num_nodes, ht, num_steps)
     %{
-     Runs a simulation of the rod without considering contact or the beam.
-     On each time-step the state of the simulation will be plotted. The
-     plot lines are color coded as follows: blue=rod_position, green=ut,
-     red=phi. Click on the plot in order to advance the simulation. If the 
-     rod comes in contact with the rigid body then the simulation will 
-     throw an error.
+     Runs a simulation of the rod and beam.  On each time-step the
+     state of the simulation will be plotted using the plot_fn specified
+     get_config.m. 
 
      @param    num_nodes       The number of nodes on each spatial domain
                                (counting nodes at x=0 and x=Lx as well as
