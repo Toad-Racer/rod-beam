@@ -1,4 +1,4 @@
-function update_animation(lines, data, const)
+function frame = update_animation(lines, data, const)
     y = 0:const.hy:const.Ly;
     x = const.hx:const.hx:1;
     rod_pos = data.u + y';
@@ -15,5 +15,6 @@ function update_animation(lines, data, const)
     
     update_secondary_plots(lines, data, const);
     
+    frame = getframe(gcf);
     drawnow;
     

@@ -11,9 +11,11 @@ function run_simulation(num_nodes, ht, num_steps)
      @param    num_steps       The numer of time-steps to simulate.  
     %}
     sim = prep_simulation(num_nodes, ht, num_steps);
-    output_data(sim);
+    frames(1) = output_data(sim);
     for i = 1:num_steps
         sim.data = step_simulation(sim.data, sim.const);
-        output_data(sim);
+        frames(i+1) = output_data(sim);
     end
+    
+    create_movie(frames, (num_steps+1)/(30*sim.const.T), 'rod-beam-sim.avi');
     

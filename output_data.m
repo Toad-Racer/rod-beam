@@ -1,4 +1,4 @@
-function output_data(sim)
+function frame = output_data(sim)
     %{
      Calls the configurable output functions. See get_config.m for more
      details.
@@ -19,7 +19,7 @@ function output_data(sim)
         end
     end
     
-    sim.plot_fn(sim.data, sim.const);
+    frame = sim.plot_fn(sim.data, sim.const);
     
     if sim.wait_for_input
         waitforbuttonpress;
