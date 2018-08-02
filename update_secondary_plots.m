@@ -2,13 +2,13 @@ function update_secondary_plots(lines, data, const)
     y = 0:const.hy:const.Ly;
     x = const.hx:const.hx:1;
     
-    % Beam's velocity
-    clearpoints(lines.beam_velo);
-    addpoints(lines.beam_velo, x, full(data.wt));
-    
-    % Rod's velocity
-    clearpoints(lines.rod_velo);
-    addpoints(lines.rod_velo, y, full(data.ut));
+%     % Beam's velocity
+%     clearpoints(lines.beam_velo);
+%     addpoints(lines.beam_velo, x, full(data.wt));
+%     
+%     % Rod's velocity
+%     clearpoints(lines.rod_velo);
+%     addpoints(lines.rod_velo, y, full(data.ut));
     
     % Rod's temp
     clearpoints(lines.rod_temp);
