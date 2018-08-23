@@ -32,7 +32,7 @@ function data = get_initial_data(config_data, const)
     data.r = r(data, const);
     %data.phi = (exp(-K(data.r).*(y_phi-1)/const.kappa_th) ...
     %    - exp(K(data.r)/const.kappa_th).*cos(pi*y_phi/2).^2)';
-    data.phi = 10*(exp(-K(data.r).*y_phi/const.kappa_th)- sin(pi/2*(1-y_phi)).^2)';
+    data.phi = 10*(exp(-K(data.r).*y_phi/const.kappa_th)- sin(pi/2*(1-y_phi)).^4)';
     %data.phi = (exp(-K(data.r)*(y_phi-1)/const.kappa_th)- exp(K(data.r))*(y_phi-1).^2)';
     
     data.energy = current_energy(data, const);
