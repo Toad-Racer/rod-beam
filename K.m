@@ -7,4 +7,5 @@ function value = K(r)
 
      @return    value    The value of K at the current time-step.
     %}
-    value = 1/2 + 1/pi*atan(-10^3*r); % formula taken from previous paper
+    %value = (1/2 + 1/pi*atan(-10^3*r)); % formula taken from previous paper
+    value = 1000*(1/2 + (1/pi)*atan(-10^8*r));
