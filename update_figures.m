@@ -21,5 +21,9 @@ function frame = update_figures(lines, data, const)
     lines.rod.YData = rod_pos;
     lines.rod.CData = [0; data.phi];
     
+    % Rod's temperature
+    clearpoints(lines.rod_temp);
+    addpoints(lines.rod_temp, y, full([0; data.phi]));
+    
     frame = getframe(gcf);
     drawnow;

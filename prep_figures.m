@@ -47,3 +47,11 @@ function lines = prep_figures(initial_data, const)
     colorbar;
     axis([0, 1.2, initial_data.u(1), 1+5*const.gap]);
     
+    % Rod's temperature
+    f6 = figure(16);
+    f6.OuterPosition = [1050 50 500 250];
+    clf('reset');
+    title('Rod''s temperature distribution');
+    lines.rod_temp = animatedline;
+
+    
