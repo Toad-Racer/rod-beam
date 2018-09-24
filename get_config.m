@@ -41,8 +41,8 @@ function config = get_config(num_nodes, ht, num_steps)
     config.wait_for_input = false; 
     
     % Set plot function
-    config.prep_plot_fn = @prep_animation;
-    config.plot_fn = @update_animation;
+    config.prep_plot_fn = @prep_figures;
+    config.plot_fn = @update_figures;
     
     % Set save function
     config.prep_save_output_fn = @prep_save_if_collision;
