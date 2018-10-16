@@ -41,11 +41,13 @@ function lines = prep_figures(initial_data, const)
     f5.OuterPosition = [550 300 500 500];
     clf('reset');
     title('Rod and Beam');
-    lines.beam = scatter(x, initial_data.w, 'filled');
+    lines.beam = scatter(x, initial_data.w, 'black', 'filled');
     hold on;
     lines.rod = scatter(1+(0*y), rod_pos, 25, [0; initial_data.phi], 'filled');
+    colormap('jet');
     colorbar;
-    axis([0, 1.2, initial_data.u(1), 1+5*const.gap]);
+    caxis([0 initial_data.phi(end)]);
+    axis([0, 1.2, initial_data.u(1)-0.1, 1+5*const.gap]);
     
     % Rod's temperature
     f6 = figure(16);
