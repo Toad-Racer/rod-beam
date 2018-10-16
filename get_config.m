@@ -26,8 +26,8 @@ function config = get_config(num_nodes, ht, num_steps)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Constants (to be consumed by get_constants.m)
     config.const = struct('alpha_d', 10^-5, 'alpha_b', 0, 'eta_d', 1, ...
-        'kappa_th', 200, 'zeta_d', 100, 'Ed', 1, 'Eb', 1, 'G', 1, ...
-        'beta', 100, 'rho', 1, 'gap', 0.002, 'Ly', 1, ...
+        'kappa_th', 200, 'zeta_d', 1, 'Ed', 1, 'Eb', 1, 'G', 1, ...
+        'beta', 250, 'rho', 1, 'gap', 0.002, 'Ly', 1, ...
         'num_nodes', num_nodes, 'ht', ht, 'num_steps', num_steps, ...
         'T', num_steps*ht);
     % Initial data (to be consumed by get_initial_data.m)
@@ -41,12 +41,12 @@ function config = get_config(num_nodes, ht, num_steps)
     config.wait_for_input = false; 
     
     % Set plot function
-    config.prep_plot_fn = @prep_figures;
-    config.plot_fn = @update_figures;
+    config.prep_plot_fn = @prep_transient;
+    config.plot_fn = @update_transient;
     
     % Set save function
-    config.prep_save_output_fn = @prep_save_if_collision;
-    config.save_output_fn = @save_if_collision;
+    config.prep_save_output_fn = @prep_save_beg_mid_end;
+    config.save_output_fn = @save_beg_mid_end;
 
     % Set log functions
     log_msgs = {'sigma_dt', ...
