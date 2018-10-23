@@ -62,3 +62,5 @@ function config = get_config(num_nodes, ht, num_steps)
     config.log_fns = false;
 %     config.prep_plot_fn = @(x, y) NaN;
 %     config.plot_fn = @(x, y, z) NaN;
+%     config.prep_save_output_fn = @() NaN;
+%     config.save_output_fn = @(w, x, y, z) NaN;
