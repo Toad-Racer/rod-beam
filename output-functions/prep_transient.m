@@ -1,11 +1,11 @@
-function lines = prep_transient(initial_data, const)
+function lines = prep_transient(initial_data, const, visibility)
     y = 0:const.hy:const.Ly;
     x = const.hx:const.hx:1;
     rod_pos = initial_data.u + y';
 
     % Beam and rod
-    f5 = figure(15);
-    f5.OuterPosition = [50 50 500 600];
+    f1 = figure;
+    f1.OuterPosition = [50 50 500 600];
     clf('reset');
     title('Rod and Beam');
     lines.beam = scatter(x, initial_data.w, 25, 'black', 'filled');
@@ -18,8 +18,8 @@ function lines = prep_transient(initial_data, const)
     axis([0, 1.2, initial_data.u(1)-0.1, 1+5*const.gap]);
 
     % Velocities
-    f6 = figure(16);
-    f6.OuterPosition = [550 50 350 600];
+    f2 = figure;
+    f2.OuterPosition = [550 50 350 600];
     clf('reset');
     % Rod's velocity
     subplot(4, 1, 1);
@@ -37,3 +37,7 @@ function lines = prep_transient(initial_data, const)
     subplot(4, 1, 4);
     title('Beam''s Displacement')
     lines.w = animatedline;
+
+    set(f1, 'Visible', visibility);
+    set(f2, 'Visible', visibility);
+    lines.figs = [f1, f2];
