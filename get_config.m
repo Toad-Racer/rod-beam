@@ -11,7 +11,7 @@ function config = get_config(num_nodes, ht, num_steps)
 
      @return    config    A struct containing the fields const, initial,
                           plot_fn, and log_fns.
-                         
+
     %}
     %%% Simulation options
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -33,20 +33,20 @@ function config = get_config(num_nodes, ht, num_steps)
     % Initial data (to be consumed by get_initial_data.m)
     config.initial = struct('u', @(y) -0.011, 'ut', @(y) 0, 'w', @(x) -0.011*x, ...
         'wt', @(x) 0, 'theta', @(x) 0, 'theta_t', @(x) 0.0*x);
-    
-    
+
+
     %%% Output options
-    
+
     % Set to true if you want to progress the simulation manually
-    config.wait_for_input = false; 
-    
+    config.wait_for_input = false;
+
     % Set plot function
     config.prep_plot_fn = @prep_transient;
     config.plot_fn = @update_transient;
-    
+
     % Set save function
-    config.prep_save_output_fn = @prep_save_beg_mid_end;
-    config.save_output_fn = @save_beg_mid_end;
+    config.prep_save_output_fn = @prep_save_transient;
+    config.save_output_fn = @save_transient;
 
     % Set log functions
     log_msgs = {'sigma_dt', ...
@@ -57,7 +57,7 @@ function config = get_config(num_nodes, ht, num_steps)
                 @(data, const) data.sigma_db};
     config.log_fns = containers.Map(log_msgs, log_data);
 
-    % For performance testing uncomment the following to suppress all output 
+    % For performance testing uncomment the following to suppress all output
 %     config.wait_for_input = false;
     config.log_fns = false;
 %     config.prep_plot_fn = @(x, y) NaN;

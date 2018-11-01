@@ -1,4 +1,4 @@
-function frame = update_holistic(lines, data, const)
+function update_holistic(lines, data, const)
     % Stress on Rod's top
     addpoints(lines.sigma_dt, data.t, full(data.sigma_dt));
 
@@ -8,5 +8,4 @@ function frame = update_holistic(lines, data, const)
     % Tip of rod
     addpoints(lines.tip, data.t, full(data.u(end)));
 
-    frame = getframe(gcf);
     drawnow;

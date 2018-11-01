@@ -1,4 +1,4 @@
-function subFrames = update_transient(lines, data, const)
+function update_transient(lines, data, const)
     y = 0:const.hy:const.Ly;
     x = const.hx:const.hx:1;
     rod_pos = data.u + y';
@@ -20,8 +20,4 @@ function subFrames = update_transient(lines, data, const)
     clearpoints(lines.w);
     addpoints(lines.w, x, full(data.w));
 
-    figs = findobj('Type', 'figure');
-    for i = 1:size(figs, 1)
-        subFrames(i) = getframe(figs(i));
-    end
     drawnow;

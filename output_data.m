@@ -1,10 +1,10 @@
-function frame = output_data(sim)
+function output_data(sim)
     %{
      Calls the configurable output functions. See get_config.m for more
      details.
 
      @param    data     A struct with fields u, phi, theta, w, ut, theta_t,
-                        and wt each containing the state of their 
+                        and wt each containing the state of their
                         respective functions at a particular time-step.
      @param    const    A struct with fields for each constant relevant to
                         the simulation. See get_constants.m for a full
@@ -18,9 +18,9 @@ function frame = output_data(sim)
             disp(fn(sim.data, sim.const));
         end
     end
-    
-    frame = sim.plot_fn(sim.data, sim.const);
-    
+
+    sim.plot_fn(sim.data, sim.const);
+
     if sim.wait_for_input
         waitforbuttonpress;
     end
