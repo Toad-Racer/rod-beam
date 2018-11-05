@@ -12,7 +12,6 @@ function run_simulation(num_nodes, ht, num_steps)
     %}
     sim = prep_simulation(num_nodes, ht, num_steps);
     output_data(sim);
-    sime.save_state = sim.save_output_fn(sim.save_state, sim.data, sim.const);
     for i = 1:num_steps
         sim.data = step_simulation(sim.data, sim.const);
         output_data(sim);

@@ -1,6 +1,6 @@
 function data = get_initial_data(config_data, const)
     %{
-     Creates a struct containing fields for all initial data. This struct  
+     Creates a struct containing fields for all initial data. This struct
      can be passed to any function in this project with a parameter name
      ending in 'data'.
 
@@ -12,7 +12,7 @@ function data = get_initial_data(config_data, const)
                                list.
 
      @return    data    A struct containing both the primary and the derived
-                        data (u, phi, theta, w, ut, theta_t, wt, f1, f2, f3, 
+                        data (u, phi, theta, w, ut, theta_t, wt, f1, f2, f3,
                         f4, r, sigma_dt) for the initial time-step.
     %}
     % Domains for primary functions
@@ -26,7 +26,7 @@ function data = get_initial_data(config_data, const)
         'w', arrayfun(config_data.w, x'), 'wt', arrayfun(config_data.wt, x'),  ...
         'theta', arrayfun(config_data.theta, x'), ...
         'theta_t', arrayfun(config_data.theta_t, x'));
-        
+
     % Misc
     data.t = 0;
     data.r = r(data, const);
@@ -34,12 +34,14 @@ function data = get_initial_data(config_data, const)
     %    - exp(K(data.r)/const.kappa_th).*cos(pi*y_phi/2).^2)';
     data.phi = 10*(exp(-K(data.r).*y_phi/const.kappa_th)- sin(pi/2*(1-y_phi)).^4)';
     %data.phi = (exp(-K(data.r)*(y_phi-1)/const.kappa_th)- exp(K(data.r))*(y_phi-1).^2)';
-    
+
     data.energy = current_energy(data, const);
     data.lost_energy = 0;
     data = merge_structs(data, loading_vectors(data, const));
     data.rod_matrix = current_rod_matrix(data, const);
-    
+
     % Assume no contact on first time-step
     data.sigma_dt = 0;
     data.sigma_db = NaN; % Don't know yet
+
+    data.assumption_consistent = NaN; % Only used in later timesteps

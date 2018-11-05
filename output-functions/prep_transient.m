@@ -6,7 +6,6 @@ function lines = prep_transient(initial_data, const, visibility)
     % Beam and rod
     f1 = figure;
     f1.OuterPosition = [50 50 500 600];
-    clf('reset');
     title('Rod and Beam');
     lines.beam = scatter(x, initial_data.w, 25, 'black', 'filled');
     hold on;
@@ -20,7 +19,6 @@ function lines = prep_transient(initial_data, const, visibility)
     % Velocities
     f2 = figure;
     f2.OuterPosition = [550 50 350 600];
-    clf('reset');
     % Rod's velocity
     subplot(4, 1, 1);
     title('Rod''s Velocity');
@@ -40,4 +38,4 @@ function lines = prep_transient(initial_data, const, visibility)
 
     set(f1, 'Visible', visibility);
     set(f2, 'Visible', visibility);
-    lines.figs = [f1, f2];
+    lines.figs = [f1; f2];

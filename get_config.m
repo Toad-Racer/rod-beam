@@ -45,8 +45,8 @@ function config = get_config(num_nodes, ht, num_steps)
     config.plot_fn = @update_transient;
 
     % Set save function
-    config.prep_save_output_fn = @prep_save_transient;
-    config.save_output_fn = @save_transient;
+    config.prep_save_output_fn = @prep_save_figs;
+    config.save_output_fn = @save_figs;
 
     % Set log functions
     log_msgs = {'sigma_dt', ...
@@ -60,7 +60,7 @@ function config = get_config(num_nodes, ht, num_steps)
     % For performance testing uncomment the following to suppress all output
 %     config.wait_for_input = false;
     config.log_fns = false;
-%     config.prep_plot_fn = @(x, y) NaN;
-%     config.plot_fn = @(x, y, z) NaN;
+    config.prep_plot_fn = @(x, y, z) NaN;
+    config.plot_fn = @(x, y, z) NaN;
 %     config.prep_save_output_fn = @() NaN;
 %     config.save_output_fn = @(w, x, y, z) NaN;
