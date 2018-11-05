@@ -21,13 +21,13 @@ function sim = prep_simulation(num_nodes, ht, num_steps)
                                 data to the matlab console at each
                                 time-step.
   %}
-  config = get_config(num_nodes, ht, num_steps);
-  sim.const = get_constants(config.const);
-  sim.data = get_initial_data(config.initial, sim.const);
-  plot_state = config.prep_plot_fn(sim.data, sim.const, 'on');
-  sim.plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
-  sim.save_state = config.prep_save_output_fn(sim.data, sim.const);
+    config = get_config(num_nodes, ht, num_steps);
+    sim.const = get_constants(config.const);
+    sim.data = get_initial_data(config.initial, sim.const);
+    plot_state = config.prep_plot_fn(sim.data, sim.const, 'on');
+    sim.plot_fn = @(data, const) config.plot_fn(plot_state, data, const);
+    sim.save_state = config.prep_save_output_fn(sim.data, sim.const);
 
-  sim.log_fns = config.log_fns;
-  sim.save_output_fn = config.save_output_fn;
-  sim.wait_for_input = config.wait_for_input;
+    sim.log_fns = config.log_fns;
+    sim.save_output_fn = config.save_output_fn;
+    sim.wait_for_input = config.wait_for_input;
