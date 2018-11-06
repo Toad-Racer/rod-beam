@@ -17,7 +17,6 @@ function lines = prep_holistic(initial_data, const, visibility)
     f3 = figure;
     f3.OuterPosition = [50 550 500 250];
     title('Tip of Rod');
-    axis([0, const.T, -inf, 2*const.gap]);
     lines.tip = animatedline('Color', 'b');
 
     set(f1, 'Visible', visibility);

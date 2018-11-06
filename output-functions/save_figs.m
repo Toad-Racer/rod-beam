@@ -9,14 +9,16 @@ function new_state = save_figs(save_state, data, const)
         post_impact = false;
     end
 
-    if post_impact
-                                % before impact
+    if post_impact & new_state.first_impact
+        new_state.first_impact = false;
+
+        % before impact
         update_transient(new_state.transient_lines, new_state.data_buffer.peek(), const);
         for i = 1:size(tran_figs, 1)
             saveas(tran_figs(i), sprintf('out/timeStep%d-%d', new_state.time_step-6, i), 'epsc');
         end
 
-                                % after impact
+        % after impact
         update_transient(new_state.transient_lines, data, const);
         for i = 1:size(tran_figs, 1)
             saveas(tran_figs(i), sprintf('out/timeStep%d-%d', new_state.time_step, i), 'epsc');
@@ -30,9 +32,9 @@ function new_state = save_figs(save_state, data, const)
 
     new_state.collisions.add(is_in_contact(data, const));
     new_state.data_buffer.push(data);
-    new_state.holistic_data.sigma_dt(new_state.time_step) = data.sigma_dt;
-    new_state.holistic_data.energy(new_state.time_step) = data.energy;
-    new_state.holistic_data.tip(new_state.time_step) = data.u(end);
+    new_state.holistic_data.sigma_dt(new_state.time_step+1) = data.sigma_dt;
+    new_state.holistic_data.energy(new_state.time_step+1) = data.energy;
+    new_state.holistic_data.tip(new_state.time_step+1) = data.u(end) + 1;
 
     if (~(new_state.time_step < const.num_steps))
         close(tran_figs);
