@@ -41,8 +41,8 @@ function config = get_config(num_nodes, ht, num_steps)
     config.wait_for_input = false;
 
     % Set plot function
-    config.prep_plot_fn = @prep_transient;
-    config.plot_fn = @update_transient;
+    config.prep_plot_fn = @prep_holistic;
+    config.plot_fn = @update_holistic;
 
     % Set save function
     config.prep_save_output_fn = @prep_save_figs;
@@ -62,5 +62,5 @@ function config = get_config(num_nodes, ht, num_steps)
     config.log_fns = false;
     config.prep_plot_fn = @(x, y, z) NaN;
     config.plot_fn = @(x, y, z) NaN;
-%     config.prep_save_output_fn = @() NaN;
-%     config.save_output_fn = @(w, x, y, z) NaN;
+    %% config.prep_save_output_fn = @(x, y) NaN;
+    %% config.save_output_fn = @(w, x, y, z) NaN;

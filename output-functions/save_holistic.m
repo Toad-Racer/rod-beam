@@ -6,6 +6,7 @@ function save_holistic(lines, holistic_data)
 
     for i = 1:size(lines.figs, 1)
         saveas(lines.figs(i), sprintf('out/holistic-%d', i), 'epsc');
+        savefig(lines.figs(i), sprintf('out/holistic-%d.fig', i));
     end
 
     close(lines.figs);

@@ -13,21 +13,12 @@ function new_state = save_figs(save_state, data, const)
         new_state.first_impact = false;
 
         % before impact
-        update_transient(new_state.transient_lines, new_state.data_buffer.peek(), const);
-        for i = 1:size(tran_figs, 1)
-            saveas(tran_figs(i), sprintf('out/timeStep%d-%d', new_state.time_step-6, i), 'epsc');
-        end
-
+        save_transient(tran_figs, new_state.transient_lines, ...
+                       new_state.data_buffer.peek(), new_state.time_step-6, const);
         % after impact
-        update_transient(new_state.transient_lines, data, const);
-        for i = 1:size(tran_figs, 1)
-            saveas(tran_figs(i), sprintf('out/timeStep%d-%d', new_state.time_step, i), 'epsc');
-        end
+        save_transient(tran_figs, new_state.transient_lines, data, new_state.time_step, const);
     elseif new_state.time_step == ceil(const.num_steps/4)
-        update_transient(new_state.transient_lines, data, const);
-        for i = 1:size(tran_figs, 1)
-            saveas(tran_figs(i), sprintf('out/timeStep%d-%d', new_state.time_step, i), 'epsc');
-        end
+        save_transient(tran_figs, new_state.transient_lines, data, new_state.time_step, const);
     end
 
     new_state.collisions.add(is_in_contact(data, const));
