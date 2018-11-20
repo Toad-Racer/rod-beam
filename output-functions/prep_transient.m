@@ -20,21 +20,25 @@ function lines = prep_transient(initial_data, const, visibility)
     f2 = figure;
     f2.OuterPosition = [550 50 350 600];
     % Rod's velocity
-    subplot(4, 1, 1);
+    subplot(5, 1, 1);
     title('Rod''s Velocity');
     lines.ut = animatedline;
     % Beam's velocity
-    subplot(4, 1, 2);
+    subplot(5, 1, 2);
     title('Beam''s Velocity');
     lines.wt = animatedline;
     % Angular velocity
-    subplot(4, 1, 3);
+    subplot(5, 1, 3);
     title('Angular Velocity');
     lines.theta_t = animatedline;
     % Beam's displacement
-    subplot(4, 1, 4);
+    subplot(5, 1, 4);
     title('Beam''s Displacement')
     lines.w = animatedline;
+    % Beam's displacement
+    subplot(5, 1, 5);
+    title('Beam''s Angle')
+    lines.theta = animatedline;
 
     set(f1, 'Visible', visibility);
     set(f2, 'Visible', visibility);
