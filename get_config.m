@@ -26,7 +26,7 @@ function config = get_config(num_nodes, ht, num_steps)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Constants (to be consumed by get_constants.m)
     config.const = struct('alpha_d', 10^-5, 'alpha_b', 0, 'eta_d', 1, ...
-        'kappa_th', 200, 'zeta_d', 1, 'Ed', 1, 'Eb', 1, 'G', 1, ...
+        'kappa_th', 10^-7, 'zeta_d', 10^-3, 'Ed', 1, 'Eb', 1, 'G', 1, ...
         'beta', 250, 'rho', 1, 'gap', 0.002, 'Ly', 1, ...
         'num_nodes', num_nodes, 'ht', ht, 'num_steps', num_steps, ...
         'T', num_steps*ht);
@@ -41,8 +41,8 @@ function config = get_config(num_nodes, ht, num_steps)
     config.wait_for_input = false;
 
     % Set plot function
-    config.prep_plot_fn = @prep_holistic;
-    config.plot_fn = @update_holistic;
+    config.prep_plot_fn = @prep_transient;
+    config.plot_fn = @update_transient;
 
     % Set save function
     config.prep_save_output_fn = @prep_save_figs;
@@ -60,7 +60,7 @@ function config = get_config(num_nodes, ht, num_steps)
     % For performance testing uncomment the following to suppress all output
 %     config.wait_for_input = false;
     config.log_fns = false;
-    config.prep_plot_fn = @(x, y, z) NaN;
-    config.plot_fn = @(x, y, z) NaN;
-    %% config.prep_save_output_fn = @(x, y) NaN;
-    %% config.save_output_fn = @(w, x, y, z) NaN;
+    %% config.prep_plot_fn = @(x, y, z) NaN;
+    %% config.plot_fn = @(x, y, z) NaN;
+    config.prep_save_output_fn = @(x, y) NaN;
+    config.save_output_fn = @(w, x, y, z) NaN;
