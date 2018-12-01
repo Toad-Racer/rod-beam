@@ -4,20 +4,20 @@ function new_state = save_figs(save_state, data, const)
     tran_figs = save_state.transient_lines.figs;
 
     if new_state.collisions.size == 3 % If we're past the first 3 timesteps
-        post_impact = ~new_state.collisions.remove() && new_state.collisions.peek();
+        post_contact = ~new_state.collisions.get(0) && new_state.collisions.get(1);
+        post_release = new_state.collisions.get(0) && ~new_state.collisions.get(1);
+        new_state.collisions.pop();
     else
-        post_impact = false;
+        post_contact = false;
+        post_release = false;
     end
 
-    if post_impact & new_state.first_impact
-        new_state.first_impact = false;
-
-        % before impact
+    if post_contact
+        % before contact
         save_transient(tran_figs, new_state.transient_lines, ...
                        new_state.data_buffer.peek(), new_state.time_step-6, const);
-        % after impact
-        save_transient(tran_figs, new_state.transient_lines, data, new_state.time_step, const);
-    elseif new_state.time_step == ceil(const.num_steps/4)
+    elseif post_release
+        % after contact
         save_transient(tran_figs, new_state.transient_lines, data, new_state.time_step, const);
     end
 
