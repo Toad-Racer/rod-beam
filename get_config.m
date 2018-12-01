@@ -15,25 +15,21 @@ function config = get_config(num_nodes, ht, num_steps)
     %}
     %%% Simulation options
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Change only two data
-    %kappa_th = 200 beta=100
-    %kappa_th = 40 beta=100
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %kappa_th = 10 beta=-100 -> it is interesting but won't be used
-    % beta gives negative energy then there are so many frequencies(beta=-1.4)
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %run_simulation(500,0.00001,1000)
+    % Change obly two data
+    % beta=2500, beta=25
+    % kappa_th = 0.85
+    % kappa_th = 85
+    %run_simulation(1000,0.0001,10000)
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Constants (to be consumed by get_constants.m)
-    config.const = struct('alpha_d', 10^-5, 'alpha_b', 0, 'eta_d', 1, ...
-        'kappa_th', 10^-7, 'zeta_d', 10^-3, 'Ed', 1, 'Eb', 1, 'G', 1, ...
-        'beta', 250, 'rho', 1, 'gap', 0.002, 'Ly', 1, ...
-        'num_nodes', num_nodes, 'ht', ht, 'num_steps', num_steps, ...
-        'T', num_steps*ht);
-    % Initial data (to be consumed by get_initial_data.m)
-    config.initial = struct('u', @(y) -0.011, 'ut', @(y) 0, 'w', @(x) -0.011*x, ...
-        'wt', @(x) 0, 'theta', @(x) 0, 'theta_t', @(x) 0.0*x);
-
+    config.const = struct('alpha_d', 10^-6, 'alpha_b', 0, 'eta_d', 10, ...
+                          'kappa_th', 85, 'zeta_d', 1, 'Ed', 500, 'Eb', 150, 'G', 1000, ...
+                          'beta', 2500, 'rho', 1, 'gap', 0.002, 'Ly', 1, 'num_steps', num_steps, ...
+                          'num_nodes', num_nodes, 'ht', ht, 'T', num_steps*ht);
+                           % Initial data (to be consumed by get_initial_data.m)
+    config.initial = struct('u', @(y) -0.001, 'ut', @(y) 0, 'w', @(x) -0.001*x, ...
+                            'wt', @(x) 0, 'theta', @(x) 0, 'theta_t', @(x) 0.0*x);
 
     %%% Output options
 
@@ -51,16 +47,18 @@ function config = get_config(num_nodes, ht, num_steps)
     % Set log functions
     log_msgs = {'sigma_dt', ...
                 'Un', ...
-                'sigma_db'};
+                'sigma_db', ...
+                'contact'};
     log_data = {@(data, const) data.sigma_dt, ...
                 @(data, const) data.u(end), ...
-                @(data, const) data.sigma_db};
+                @(data, const) data.sigma_db, ...
+                @(data, const) is_in_contact(data, const)};
     config.log_fns = containers.Map(log_msgs, log_data);
 
     % For performance testing uncomment the following to suppress all output
 %     config.wait_for_input = false;
     config.log_fns = false;
-    %% config.prep_plot_fn = @(x, y, z) NaN;
-    %% config.plot_fn = @(x, y, z) NaN;
-    config.prep_save_output_fn = @(x, y) NaN;
-    config.save_output_fn = @(w, x, y, z) NaN;
+    config.prep_plot_fn = @(x, y, z) NaN;
+    config.plot_fn = @(x, y, z) NaN;
+    %% config.prep_save_output_fn = @(x, y) NaN;
+    %% config.save_output_fn = @(w, x, y, z) NaN;
