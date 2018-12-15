@@ -14,7 +14,7 @@ function lines = prep_transient(initial_data, const, visibility)
     bar = colorbar;
     bar.Label.String = 'Temperature';
     caxis([0 initial_data.phi(end)]);
-    axis([0, 1.2, initial_data.u(1)-0.1, 1+5*const.gap]);
+    axis([0, 1.2, initial_data.u(1)-0.1, 1+const.gap]);
 
     % Velocities
     f2 = figure;

@@ -2,7 +2,7 @@ function lines = prep_holistic(initial_data, const, visibility)
     % Stress on Rod's top
     f1 = figure;
     f1.OuterPosition = [50 400 250 250];
-    title('Contact forces on the top of the rod');
+    title('Contact forces');
     axis([0, const.T, -inf, inf]);
     lines.sigma_dt = animatedline('Color', 'r');
 
